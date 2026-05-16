@@ -29,5 +29,15 @@ public class MyAccountServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
+        String phone = (String) session.getAttribute("customerPhone");
+        if (phone != null) phone = phone.trim();
+        
+        final String searchPhone = phone;
+        List<Reservation> allReservations = reservationService.getAllReservations();
+        List<Reservation> myReservations = allReservations.stream()
+                .filter(r -> r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone))
+                .collect(Collectors.toList());
+        request.setAttribute("myReservations", myReservations);
     }
 }
