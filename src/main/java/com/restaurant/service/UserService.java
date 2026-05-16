@@ -5,6 +5,10 @@ import com.restaurant.model.User;
 
 import java.util.List;
 
+/**
+ * Service layer for User operations.
+ * Coordinates between Servlets and Data Access Layer.
+ */
 public class UserService {
     private UserDAO userDAO;
 
