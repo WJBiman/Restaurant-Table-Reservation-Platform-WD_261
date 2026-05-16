@@ -31,13 +31,15 @@ public class MyAccountServlet extends HttpServlet {
         }
 
         String phone = (String) session.getAttribute("customerPhone");
-        if (phone != null) phone = phone.trim();
+        final String searchPhone = phone != null ? phone.trim() : null;
         
-        final String searchPhone = phone;
-        List<Reservation> allReservations = reservationService.getAllReservations();
-        List<Reservation> myReservations = allReservations.stream()
+        List<Reservation> myReservations = reservationService.getAllReservations().stream()
                 .filter(r -> r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone))
                 .collect(Collectors.toList());
+
+        List<com.restaurant.model.Table> tables = new com.restaurant.service.TableService().getAllTables();
+        request.setAttribute("tables", tables);
         request.setAttribute("myReservations", myReservations);
+        request.getRequestDispatcher("my_reservations.jsp").forward(request, response);
     }
 }
