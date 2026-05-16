@@ -41,4 +41,18 @@ public class TableDAO {
             e.printStackTrace();
         }
     }
+
+    public void updateTable(Table table) {
+        String sql = "UPDATE restaurant_tables SET capacity=?, availability_status=?, location=? WHERE table_id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, table.getCapacity());
+            pstmt.setString(2, table.getAvailabilityStatus());
+            pstmt.setString(3, table.getLocation());
+            pstmt.setString(4, table.getTableId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
