@@ -8,4 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
+    public void addUser(User user) {
+        String sql = "INSERT INTO users (id, name, phone, email, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getId());
+            pstmt.setString(2, user.getName());
+            pstmt.setString(3, user.getPhone());
+            pstmt.setString(4, user.getEmail());
+            pstmt.setString(5, user.getUsername());
+            pstmt.setString(6, user.getPassword());
+            pstmt.setString(7, user.getRole());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
