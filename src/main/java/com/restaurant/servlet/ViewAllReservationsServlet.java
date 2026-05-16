@@ -32,5 +32,7 @@ public class ViewAllReservationsServlet extends HttpServlet {
             if (rs.next()) completedCount = rs.getInt(1);
         } catch (java.sql.SQLException e) { e.printStackTrace(); }
         request.setAttribute("completedCount", completedCount);
+
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }
