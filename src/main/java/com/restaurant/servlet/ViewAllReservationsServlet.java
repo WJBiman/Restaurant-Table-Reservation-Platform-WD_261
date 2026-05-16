@@ -12,4 +12,14 @@ import java.io.IOException;
 @WebServlet("/viewAllReservations")
 public class ViewAllReservationsServlet extends HttpServlet {
     private ReservationService reservationService = new ReservationService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("adminLoggedIn") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        request.setAttribute("reservations", reservationService.getAllReservations());
+    }
 }
