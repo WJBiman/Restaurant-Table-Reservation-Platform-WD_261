@@ -15,4 +15,8 @@ public class TableService {
     public List<Table> getAllTables() {
         return tableDAO.getAllTables();
     }
+
+    public Table getTableById(String tableId) {
+        return tableDAO.getTableById(tableId);
+    }
 }
