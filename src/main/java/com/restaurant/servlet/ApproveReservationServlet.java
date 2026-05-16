@@ -23,5 +23,11 @@ public class ApproveReservationServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         Reservation res = reservationService.getReservationById(id);
+        
+        boolean success = false;
+        if (res != null) {
+            res.setStatus("Confirmed");
+            success = reservationService.updateReservation(res);
+        }
     }
 }
