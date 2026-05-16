@@ -29,6 +29,12 @@ public class UpdateUserServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
+        if (name == null || name.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Name is required.");
+            request.getRequestDispatcher("admin_update_user.jsp").forward(request, response);
+            return;
+        }
+
         User user = new User(id != null ? id.trim() : null, name, phone, email, username, password, role);
         boolean success = userService.updateUser(user);
     }
