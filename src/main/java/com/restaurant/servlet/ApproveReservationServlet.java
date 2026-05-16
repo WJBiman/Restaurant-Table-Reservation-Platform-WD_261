@@ -20,5 +20,8 @@ public class ApproveReservationServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
+        String id = request.getParameter("id");
+        Reservation res = reservationService.getReservationById(id);
     }
 }
