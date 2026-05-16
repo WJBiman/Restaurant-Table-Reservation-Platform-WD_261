@@ -24,4 +24,15 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+
+    public void deleteUser(String userId) {
+        String sql = "DELETE FROM users WHERE id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
