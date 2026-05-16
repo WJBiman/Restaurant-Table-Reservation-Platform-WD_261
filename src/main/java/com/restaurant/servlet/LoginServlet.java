@@ -15,5 +15,13 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
+
+        // Hardcoded admin
+        if ("admin".equals(user) && "admin123".equals(pass)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("adminLoggedIn", true);
+            response.sendRedirect("viewAllReservations");
+            return;
+        }
     }
 }
