@@ -18,14 +18,15 @@ public class ReservationService {
         this.tableDAO = new TableDAO();
     }
 
-    public boolean addReservation(Reservation reservation) {
-        List<Reservation> existingReservations = reservationDAO.getAllReservations();
-        boolean isBooked = existingReservations.stream()
-                .anyMatch(r -> r.getTableNumber().equals(reservation.getTableNumber()) &&
-                               r.getReservationDate().equals(reservation.getReservationDate()) &&
-                               r.getReservationTime().equals(reservation.getReservationTime()));
-        
-        if (isBooked) return false;
-        return true;
+    public List<Reservation> getAllReservations() {
+        return reservationDAO.getAllReservations().stream()
+                .sorted(Comparator.comparing(Reservation::getSubmissionTimestamp, Comparator.nullsFirst(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
+    }
+
+    public List<Table> getAvailableTables() {
+        return tableDAO.getAllTables().stream()
+                .filter(t -> "Available".equalsIgnoreCase(t.getAvailabilityStatus()))
+                .collect(Collectors.toList());
     }
 }
