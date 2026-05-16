@@ -19,16 +19,13 @@ public class ReservationService {
     }
 
     public boolean addReservation(Reservation reservation) {
-        Table selectedTable = tableDAO.getTableById(reservation.getTableNumber());
-        if (selectedTable == null) return false;
+        List<Reservation> existingReservations = reservationDAO.getAllReservations();
+        boolean isBooked = existingReservations.stream()
+                .anyMatch(r -> r.getTableNumber().equals(reservation.getTableNumber()) &&
+                               r.getReservationDate().equals(reservation.getReservationDate()) &&
+                               r.getReservationTime().equals(reservation.getReservationTime()));
         
-        if (!"Available".equalsIgnoreCase(selectedTable.getAvailabilityStatus())) {
-            return false;
-        }
-        
-        if (selectedTable.getCapacity() < reservation.getGuestCount()) {
-            return false;
-        }
+        if (isBooked) return false;
         return true;
     }
 }
