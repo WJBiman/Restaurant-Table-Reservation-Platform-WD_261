@@ -29,3 +29,12 @@
     int totalTab = tables != null ? tables.size() : 0;
     int totalUsr = users != null ? users.size() : 0;
 %>
+
+<main class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 style="font-family: 'Playfair Display'; color: #7a111e;">Service Overview</h2>
+            <p class="text-muted small mb-0">Real-time status of curated dining.</p>
+        </div>
+    </div>
+</main>
