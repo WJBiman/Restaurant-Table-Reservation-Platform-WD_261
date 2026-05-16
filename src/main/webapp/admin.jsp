@@ -9,3 +9,5 @@
         return;
     }
 %>
+<jsp:include page="includes/admin_header.jsp" />
+<script>document.getElementById('admin-nav-res').classList.add('active');</script>
