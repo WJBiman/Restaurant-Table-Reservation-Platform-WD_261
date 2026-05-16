@@ -33,36 +33,11 @@ public class ReservationDAO {
         return reservations;
     }
 
-    public void addReservation(Reservation res) {
-        String sql = "INSERT INTO reservations (reservation_id, customer_name, phone_number, reservation_date, reservation_time, guest_count, table_number, status, submission_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    public void deleteReservation(String reservationId) {
+        String sql = "DELETE FROM reservations WHERE reservation_id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, res.getReservationId());
-            pstmt.setString(2, res.getCustomerName());
-            pstmt.setString(3, res.getPhoneNumber());
-            pstmt.setString(4, res.getReservationDate());
-            pstmt.setString(5, res.getReservationTime());
-            pstmt.setInt(6, res.getGuestCount());
-            pstmt.setString(7, res.getTableNumber());
-            pstmt.setString(8, res.getStatus());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateReservation(Reservation res) {
-        String sql = "UPDATE reservations SET customer_name=?, phone_number=?, reservation_date=?, reservation_time=?, guest_count=?, table_number=?, status=? WHERE reservation_id=?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, res.getCustomerName());
-            pstmt.setString(2, res.getPhoneNumber());
-            pstmt.setString(3, res.getReservationDate());
-            pstmt.setString(4, res.getReservationTime());
-            pstmt.setInt(5, res.getGuestCount());
-            pstmt.setString(6, res.getTableNumber());
-            pstmt.setString(7, res.getStatus());
-            pstmt.setString(8, res.getReservationId());
+            pstmt.setString(1, reservationId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
