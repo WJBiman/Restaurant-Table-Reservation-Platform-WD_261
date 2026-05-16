@@ -11,4 +11,8 @@ public class TableService {
     public TableService() {
         this.tableDAO = new TableDAO();
     }
+
+    public List<Table> getAllTables() {
+        return tableDAO.getAllTables();
+    }
 }
