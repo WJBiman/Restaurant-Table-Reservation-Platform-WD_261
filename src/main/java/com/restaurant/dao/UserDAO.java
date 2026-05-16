@@ -7,6 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object for User operations.
+ * Handles all database interactions for the 'users' table.
+ */
 public class UserDAO {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
