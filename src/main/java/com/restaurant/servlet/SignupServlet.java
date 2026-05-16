@@ -11,4 +11,13 @@ import java.io.IOException;
 
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+    }
 }
