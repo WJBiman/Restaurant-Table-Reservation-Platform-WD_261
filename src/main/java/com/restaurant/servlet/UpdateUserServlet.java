@@ -15,19 +15,21 @@ public class UpdateUserServlet extends HttpServlet {
     private UserService userService = new UserService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("adminLoggedIn") == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        String id = request.getParameter("id");
-        User user = userService.getUserById(id);
-        if (user != null) {
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("admin_update_user.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("viewAllReservations");
-        }
+        String id = request.getParameter("userId");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+
+        User user = new User(id != null ? id.trim() : null, name, phone, email, username, password, role);
+        boolean success = userService.updateUser(user);
     }
 }
