@@ -13,4 +13,12 @@ import java.io.IOException;
 @WebServlet("/approveReservation")
 public class ApproveReservationServlet extends HttpServlet {
     private ReservationService reservationService = new ReservationService();
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("adminLoggedIn") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    }
 }
