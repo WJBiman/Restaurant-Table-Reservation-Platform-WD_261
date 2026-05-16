@@ -35,5 +35,18 @@ public class SignupServlet extends HttpServlet {
             request.getRequestDispatcher("signup.jsp").forward(request, response);
             return;
         }
+
+        String id = "USR-" + java.util.UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        User user = new User(id, name, phone, email, username, password, "CUSTOMER");
+        userService.addUser(user);
+
+        // Auto login after signup
+        request.getSession().setAttribute("customerLoggedIn", true);
+        request.getSession().setAttribute("customerUsername", username);
+        request.getSession().setAttribute("customerName", name);
+        request.getSession().setAttribute("customerPhone", phone);
+        request.getSession().setAttribute("customerEmail", email);
+
+        response.sendRedirect("myAccount");
     }
 }
