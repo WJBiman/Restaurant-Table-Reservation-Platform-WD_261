@@ -55,4 +55,13 @@ public class TableDAO {
             e.printStackTrace();
         }
     }
+
+    public void deleteTable(String tableId) throws SQLException {
+        String sql = "DELETE FROM restaurant_tables WHERE table_id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, tableId);
+            pstmt.executeUpdate();
+        }
+    }
 }
