@@ -14,8 +14,6 @@
 
 <% 
     List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
-    List<Table> tables = (List<Table>) request.getAttribute("tables");
-    List<User> users = (List<User>) request.getAttribute("users");
 %>
 
 <main class="container-fluid">
@@ -29,11 +27,13 @@
                                 for (Reservation r : reservations) { 
                             %>
                             <tr class="align-middle">
-                                <td class="text-muted small">#<%= r.getReservationId() %></td>
-                                <td><span class="fw-bold"><%= r.getCustomerName() %></span></td>
-                                <td><%= r.getReservationDate() %></td>
-                                <td><%= r.getGuestCount() %></td>
                                 <td><%= r.getStatus() %></td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button class="btn btn-sm btn-success">Approve</button>
+                                        <button class="btn btn-sm btn-danger">Cancel</button>
+                                    </div>
+                                </td>
                             </tr>
                             <% } } %>
                         </tbody>
