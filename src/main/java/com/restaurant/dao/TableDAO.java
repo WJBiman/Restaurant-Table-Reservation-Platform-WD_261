@@ -64,4 +64,25 @@ public class TableDAO {
             pstmt.executeUpdate();
         }
     }
+
+    public Table getTableById(String tableId) {
+        String sql = "SELECT * FROM restaurant_tables WHERE table_id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, tableId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Table(
+                        rs.getString("table_id"),
+                        rs.getInt("capacity"),
+                        rs.getString("availability_status"),
+                        rs.getString("location")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
