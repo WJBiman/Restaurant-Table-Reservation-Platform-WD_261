@@ -29,5 +29,13 @@ public class ApproveReservationServlet extends HttpServlet {
             res.setStatus("Confirmed");
             success = reservationService.updateReservation(res);
         }
+
+        String ajax = request.getParameter("ajax");
+        if ("true".equals(ajax)) {
+            response.setContentType("text/plain");
+            response.getWriter().write(success ? "success" : "failure");
+        } else {
+            response.sendRedirect("viewAllReservations");
+        }
     }
 }
