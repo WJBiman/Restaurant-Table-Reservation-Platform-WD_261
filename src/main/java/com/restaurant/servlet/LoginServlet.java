@@ -30,5 +30,20 @@ public class LoginServlet extends HttpServlet {
                 .filter(u -> u.getUsername().equals(user) && u.getPassword().equals(pass))
                 .findFirst()
                 .orElse(null);
+        
+        if (matchedUser != null) {
+            HttpSession session = request.getSession();
+            if ("ADMIN".equalsIgnoreCase(matchedUser.getRole())) {
+                session.setAttribute("adminLoggedIn", true);
+                response.sendRedirect("viewAllReservations");
+            } else {
+                session.setAttribute("customerLoggedIn", true);
+                session.setAttribute("customerUsername", matchedUser.getUsername());
+                session.setAttribute("customerName", matchedUser.getName());
+                session.setAttribute("customerPhone", matchedUser.getPhone());
+                session.setAttribute("customerEmail", matchedUser.getEmail());
+                response.sendRedirect("myAccount");
+            }
+        }
     }
 }
