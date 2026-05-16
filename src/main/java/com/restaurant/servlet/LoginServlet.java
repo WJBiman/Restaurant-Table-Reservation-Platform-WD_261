@@ -23,5 +23,12 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("viewAllReservations");
             return;
         }
+
+        // Check against Database
+        com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
+        com.restaurant.model.User matchedUser = userService.getAllUsers().stream()
+                .filter(u -> u.getUsername().equals(user) && u.getPassword().equals(pass))
+                .findFirst()
+                .orElse(null);
     }
 }
