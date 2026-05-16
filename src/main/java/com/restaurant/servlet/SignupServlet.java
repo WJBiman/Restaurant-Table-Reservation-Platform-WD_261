@@ -19,5 +19,21 @@ public class SignupServlet extends HttpServlet {
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
+        // Simple validation
+        if (name == null || username == null || password == null) {
+            request.setAttribute("errorMessage", "All fields are required.");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            return;
+        }
+
+        com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
+        boolean exists = userService.getAllUsers().stream()
+                .anyMatch(u -> u.getUsername().equals(username));
+        if (exists) {
+            request.setAttribute("errorMessage", "Username already exists.");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            return;
+        }
     }
 }
