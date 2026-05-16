@@ -31,18 +31,22 @@
 %>
 
 <main class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h2 style="font-family: 'Playfair Display'; color: #7a111e;">Service Overview</h2>
-            <p class="text-muted small mb-0">Real-time status of curated dining.</p>
-        </div>
-    </div>
-
-    <!-- Tab Contents -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="reservations-pane">
             <div class="content-card">
-                <h5 class="p-4 border-bottom mb-0 fw-bold">Guest List</h5>
+                <div class="table-responsive">
+                    <table class="table table-custom mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Name</th>
+                                <th>Date/Time</th>
+                                <th>Guests</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
