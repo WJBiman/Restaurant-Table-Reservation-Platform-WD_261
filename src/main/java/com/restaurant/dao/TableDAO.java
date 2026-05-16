@@ -27,4 +27,18 @@ public class TableDAO {
         }
         return tables;
     }
+
+    public void addTable(Table table) {
+        String sql = "INSERT INTO restaurant_tables (table_id, capacity, availability_status, location) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, table.getTableId());
+            pstmt.setInt(2, table.getCapacity());
+            pstmt.setString(3, table.getAvailabilityStatus());
+            pstmt.setString(4, table.getLocation());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
