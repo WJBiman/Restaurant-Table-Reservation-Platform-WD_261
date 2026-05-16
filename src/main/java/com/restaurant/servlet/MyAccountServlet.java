@@ -21,4 +21,13 @@ public class MyAccountServlet extends HttpServlet {
     public void init() {
         this.reservationService = new ReservationService();
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("customerLoggedIn") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    }
 }
