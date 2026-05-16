@@ -37,4 +37,14 @@
             <p class="text-muted small mb-0">Real-time status of curated dining.</p>
         </div>
     </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col">
+            <div class="stats-card filter-card active">
+                <h2 class="mb-2 fw-bold"><%= totalRes %></h2>
+                <span class="text-muted small">Total Bookings</span>
+            </div>
+        </div>
+    </div>
 </main>
