@@ -48,6 +48,23 @@ public class UserDAO {
         }
     }
 
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET name=?, phone=?, email=?, username=?, password=?, role=? WHERE id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getPhone());
+            pstmt.setString(3, user.getEmail());
+            pstmt.setString(4, user.getUsername());
+            pstmt.setString(5, user.getPassword());
+            pstmt.setString(6, user.getRole());
+            pstmt.setString(7, user.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteUser(String userId) {
         String sql = "DELETE FROM users WHERE id=?";
         try (Connection conn = DBConnection.getConnection();
@@ -81,5 +98,30 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<User> getUsersByRole(String role) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE LOWER(role)=LOWER(?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, role);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    users.add(new User(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }
