@@ -17,4 +17,18 @@ public class ReservationService {
         this.reservationDAO = new ReservationDAO();
         this.tableDAO = new TableDAO();
     }
+
+    public boolean addReservation(Reservation reservation) {
+        Table selectedTable = tableDAO.getTableById(reservation.getTableNumber());
+        if (selectedTable == null) return false;
+        
+        if (!"Available".equalsIgnoreCase(selectedTable.getAvailabilityStatus())) {
+            return false;
+        }
+        
+        if (selectedTable.getCapacity() < reservation.getGuestCount()) {
+            return false;
+        }
+        return true;
+    }
 }
