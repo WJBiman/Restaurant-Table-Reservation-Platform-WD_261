@@ -21,5 +21,7 @@ public class ViewAllReservationsServlet extends HttpServlet {
         }
 
         request.setAttribute("reservations", reservationService.getAllReservations());
+        request.setAttribute("tables", reservationService.getAvailableTables());
+        request.setAttribute("users", new com.restaurant.service.UserService().getAllUsers());
     }
 }
