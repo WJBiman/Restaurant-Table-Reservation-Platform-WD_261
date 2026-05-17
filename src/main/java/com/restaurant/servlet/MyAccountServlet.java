@@ -33,11 +33,17 @@ public class MyAccountServlet extends HttpServlet {
 
         String phone = (String) session.getAttribute("customerPhone");
         String email = (String) session.getAttribute("customerEmail");
-        final String searchPhone = phone != null ? phone.trim() : null;
-        final String searchEmail = email != null ? email.trim() : null;
+        if (phone == null && email == null) {
+            request.setAttribute("errorMessage", "Session attributes are missing. Please re-login.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+        
+        final String searchPhone = phone != null ? phone.trim() : "";
+        final String searchEmail = email != null ? email.trim() : "";
         
         List<Reservation> myReservations = reservationService.getAllReservations().stream()
-                .filter(r -> (r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone)) || (r.getEmail() != null && r.getEmail().trim().equalsIgnoreCase(searchEmail)))
+                .filter(r -> (!searchPhone.isEmpty() && r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone)) || (!searchEmail.isEmpty() && r.getEmail() != null && r.getEmail().trim().equalsIgnoreCase(searchEmail)))
                 .sorted(Comparator.comparing(Reservation::getReservationDate, Comparator.nullsLast(Comparator.reverseOrder())))
                 .limit(50) // Safeguard maximum records displayed in dashboard
                 .collect(Collectors.toList());
