@@ -40,4 +40,12 @@ public class ReservationService {
         }
         return table.getCapacity() >= guestsCount;
     }
+
+    public boolean isTableReservedOnDate(String tableId, String date) {
+        if (tableId == null || date == null) {
+            return false;
+        }
+        return getAllReservations().stream()
+                .anyMatch(r -> tableId.equalsIgnoreCase(r.getTableId()) && date.equals(r.getReservationDate()) && !"CANCELLED".equalsIgnoreCase(r.getStatus()));
+    }
 }
