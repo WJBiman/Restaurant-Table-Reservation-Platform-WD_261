@@ -31,6 +31,13 @@ public class UserService {
         return getAllUsers().stream().anyMatch(u -> username.equalsIgnoreCase(u.getUsername()));
     }
 
+    public boolean isEmailTaken(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+        return getAllUsers().stream().anyMatch(u -> email.equalsIgnoreCase(u.getEmail()));
+    }
+
     public boolean addUser(User user) {
         User existing = getUserById(user.getId());
         if (existing != null) {
