@@ -4,6 +4,7 @@ import com.restaurant.dao.TableDAO;
 import com.restaurant.model.Table;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TableService {
     private TableDAO tableDAO;
@@ -46,6 +47,15 @@ public class TableService {
         return (int) getAllTables().stream()
                 .filter(t -> "Occupied".equalsIgnoreCase(t.getAvailabilityStatus()))
                 .count();
+    }
+
+    public List<Table> getTablesByLocation(String location) {
+        if (location == null || location.trim().isEmpty()) {
+            return getAllTables();
+        }
+        return getAllTables().stream()
+                .filter(t -> location.equalsIgnoreCase(t.getLocation()))
+                .collect(Collectors.toList());
     }
 
     public boolean deleteTable(String tableId) {
