@@ -43,7 +43,9 @@ public class AddReservationServlet extends HttpServlet {
             String table = request.getParameter("tableNumber");
             String status = "Pending";
 
+            System.out.println("AddReservationServlet: Received request - Name: " + name + ", Table: " + table);
             if (name == null || phone == null || date == null || table == null) {
+                System.out.println("AddReservationServlet: Missing fields - Name: " + name + ", Phone: " + phone + ", Date: " + date + ", Table: " + table);
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("{\"success\": false, \"message\": \"Missing required fields.\"}");
                 return;
@@ -75,7 +77,17 @@ public class AddReservationServlet extends HttpServlet {
                 response.getWriter().write("{\"success\": false, \"message\": \"Invalid date format.\"}");
                 return;
             }
+
+            Reservation reservation = new Reservation(id, name, phone, date, time, guests, table, status, null);
+            boolean success = reservationService.addReservation(reservation);
+            
+            if (success) {
+                response.getWriter().write("{\"success\": true, \"reservationId\": \"" + id + "\"}");
+            } else {
+                response.getWriter().write("{\"success\": false, \"message\": \"This table is already reserved for the selected time slot.\"}");
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"success\": false, \"message\": \"Server Error: " + e.getMessage() + "\"}");
         }
