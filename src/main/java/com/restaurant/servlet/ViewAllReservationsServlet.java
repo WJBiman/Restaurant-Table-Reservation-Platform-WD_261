@@ -1,4 +1,4 @@
-﻿package com.restaurant.servlet;
+package com.restaurant.servlet;
 
 import com.restaurant.service.ReservationService;
 
@@ -27,10 +27,13 @@ public class ViewAllReservationsServlet extends HttpServlet {
         // Fetch completed count
         int completedCount = 0;
         try (java.sql.Connection conn = com.restaurant.util.DBConnection.getConnection();
-             java.sql.Statement stmt = conn.createStatement();
-             java.sql.ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM completed_reservations")) {
+             java.sql.PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM completed_reservations");
+             java.sql.ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) completedCount = rs.getInt(1);
-        } catch (java.sql.SQLException e) { e.printStackTrace(); }
+        } catch (java.sql.SQLException e) {
+            System.err.println("[ADMIN ERROR] Failed to fetch completed reservations count: " + e.getMessage());
+            e.printStackTrace();
+        }
         request.setAttribute("completedCount", completedCount);
 
         request.getRequestDispatcher("admin.jsp").forward(request, response);
