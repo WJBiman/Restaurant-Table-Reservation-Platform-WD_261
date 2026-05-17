@@ -22,7 +22,9 @@ public class ViewAllReservationsServlet extends HttpServlet {
 
         request.setAttribute("reservations", reservationService.getAllReservations());
         request.setAttribute("tables", reservationService.getAvailableTables());
-        request.setAttribute("users", new com.restaurant.service.UserService().getAllUsers());
+        
+        com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
+        request.setAttribute("users", userService.getAllUsers());
         
         // Fetch completed count
         int completedCount = 0;
@@ -41,6 +43,12 @@ public class ViewAllReservationsServlet extends HttpServlet {
                 .filter(r -> !"CANCELLED".equalsIgnoreCase(r.getStatus()))
                 .count();
         request.setAttribute("activeCount", activeCount);
+
+        // Fetch total registered customers count
+        long customerCount = userService.getAllUsers().stream()
+                .filter(u -> "CUSTOMER".equalsIgnoreCase(u.getRole()))
+                .count();
+        request.setAttribute("customerCount", customerCount);
 
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
