@@ -1,4 +1,4 @@
-﻿package com.restaurant.service;
+package com.restaurant.service;
 
 import com.restaurant.dao.ReservationDAO;
 import com.restaurant.dao.TableDAO;
@@ -28,5 +28,16 @@ public class ReservationService {
         return tableDAO.getAllTables().stream()
                 .filter(t -> "Available".equalsIgnoreCase(t.getAvailabilityStatus()))
                 .collect(Collectors.toList());
+    }
+
+    public boolean canTableAccommodate(String tableId, int guestsCount) {
+        Table table = tableDAO.getAllTables().stream()
+                .filter(t -> t.getTableId().equalsIgnoreCase(tableId))
+                .findFirst()
+                .orElse(null);
+        if (table == null) {
+            return false;
+        }
+        return table.getCapacity() >= guestsCount;
     }
 }
