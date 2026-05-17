@@ -1,4 +1,4 @@
-﻿package com.restaurant.service;
+package com.restaurant.service;
 
 import com.restaurant.dao.TableDAO;
 import com.restaurant.model.Table;
@@ -30,12 +30,16 @@ public class TableService {
     }
 
     public boolean updateTable(Table updatedTable) {
-        User existing = getTableById(updatedTable.getTableId());
+        Table existing = getTableById(updatedTable.getTableId());
         if (existing == null) {
             return false;
         }
         tableDAO.updateTable(updatedTable);
         return true;
+    }
+
+    public boolean isValidCapacity(int capacity) {
+        return capacity >= 2 && capacity <= 20;
     }
 
     public boolean deleteTable(String tableId) {
