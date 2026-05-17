@@ -39,6 +39,7 @@ public class MyAccountServlet extends HttpServlet {
         List<Reservation> myReservations = reservationService.getAllReservations().stream()
                 .filter(r -> (r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone)) || (r.getEmail() != null && r.getEmail().trim().equalsIgnoreCase(searchEmail)))
                 .sorted(Comparator.comparing(Reservation::getReservationDate, Comparator.nullsLast(Comparator.reverseOrder())))
+                .limit(50) // Safeguard maximum records displayed in dashboard
                 .collect(Collectors.toList());
 
         List<com.restaurant.model.Table> tables = new com.restaurant.service.TableService().getAllTables();
