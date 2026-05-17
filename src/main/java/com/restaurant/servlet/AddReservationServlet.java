@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @WebServlet("/addReservation")
@@ -60,6 +61,18 @@ public class AddReservationServlet extends HttpServlet {
             }
             if (selectedTable.getCapacity() < guests) {
                 response.getWriter().write("{\"success\": false, \"message\": \"This table only seats " + selectedTable.getCapacity() + " guests. Please choose a larger table.\"}");
+                return;
+            }
+
+            // Validate that the date is not in the past
+            try {
+                LocalDate resDate = LocalDate.parse(date);
+                if (resDate.isBefore(LocalDate.now())) {
+                    response.getWriter().write("{\"success\": false, \"message\": \"Cannot book a date in the past.\"}");
+                    return;
+                }
+            } catch (Exception e) {
+                response.getWriter().write("{\"success\": false, \"message\": \"Invalid date format.\"}");
                 return;
             }
         } catch (Exception e) {
