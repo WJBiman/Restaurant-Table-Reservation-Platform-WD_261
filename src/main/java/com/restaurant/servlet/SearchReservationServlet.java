@@ -14,4 +14,13 @@ import java.util.List;
 @WebServlet("/searchReservation")
 public class SearchReservationServlet extends HttpServlet {
     private ReservationService reservationService = new ReservationService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String query = request.getParameter("query");
+        List<Reservation> results = reservationService.searchReservation(query);
+        
+        request.setAttribute("reservations", results);
+        request.getRequestDispatcher("search.jsp").forward(request, response);
+    }
 }
