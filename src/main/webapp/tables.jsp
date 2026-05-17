@@ -194,5 +194,12 @@
     }
 </style>
 
+<script>
+    function showUnavailableModal() { document.getElementById('unavailableModal').style.display = 'flex'; }
+    function closeUnavailableModal() { document.getElementById('unavailableModal').style.display = 'none'; }
+    document.getElementById('nav-tables').classList.add('active');
+</script>
+
+<jsp:include page="includes/footer.jsp" />
 </body>
 </html>
