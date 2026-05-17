@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @WebServlet("/viewAllReservations")
 public class ViewAllReservationsServlet extends HttpServlet {
@@ -20,7 +22,11 @@ public class ViewAllReservationsServlet extends HttpServlet {
             return;
         }
 
-        request.setAttribute("reservations", reservationService.getAllReservations());
+        // Sort reservations chronologically descending for admin view
+        request.setAttribute("reservations", reservationService.getAllReservations().stream()
+                .sorted(Comparator.comparing(com.restaurant.model.Reservation::getReservationDate, Comparator.nullsLast(Comparator.reverseOrder())))
+                .collect(Collectors.toList()));
+                
         request.setAttribute("tables", reservationService.getAvailableTables());
         
         com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
