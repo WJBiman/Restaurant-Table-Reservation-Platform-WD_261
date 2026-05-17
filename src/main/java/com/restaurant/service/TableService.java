@@ -21,9 +21,20 @@ public class TableService {
         return tableDAO.getTableById(tableId);
     }
 
+    public boolean validateTableFields(Table table) {
+        if (table == null) return false;
+        if (table.getTableId() == null || table.getTableId().trim().isEmpty()) return false;
+        if (!isValidCapacity(table.getCapacity())) return false;
+        if (table.getLocation() == null || table.getLocation().trim().isEmpty()) return false;
+        return true;
+    }
+
     public boolean addTable(Table table) {
         Table existing = getTableById(table.getTableId());
         if (existing != null) {
+            return false;
+        }
+        if (!validateTableFields(table)) {
             return false;
         }
         tableDAO.addTable(table);
@@ -33,6 +44,9 @@ public class TableService {
     public boolean updateTable(Table updatedTable) {
         Table existing = getTableById(updatedTable.getTableId());
         if (existing == null) {
+            return false;
+        }
+        if (!validateTableFields(updatedTable)) {
             return false;
         }
         tableDAO.updateTable(updatedTable);
