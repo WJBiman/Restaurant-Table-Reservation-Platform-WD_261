@@ -36,6 +36,12 @@ public class ViewAllReservationsServlet extends HttpServlet {
         }
         request.setAttribute("completedCount", completedCount);
 
+        // Fetch active reservations count
+        long activeCount = reservationService.getAllReservations().stream()
+                .filter(r -> !"CANCELLED".equalsIgnoreCase(r.getStatus()))
+                .count();
+        request.setAttribute("activeCount", activeCount);
+
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }
