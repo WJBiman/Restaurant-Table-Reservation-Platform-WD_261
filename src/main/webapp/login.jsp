@@ -42,6 +42,32 @@
             max-width: 450px;
             line-height: 1.3;
         }
+        .login-form-panel {
+            flex: 1;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 40px;
+            position: relative;
+            overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -51,6 +77,13 @@
     <div class="login-image-panel">
         <div class="login-quote">
             "An unparalleled epicurean journey."
+        </div>
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div class="login-form-panel">
+        <a href="index.jsp" class="close-btn"><i class="fa-solid fa-xmark"></i></a>
+        <div class="login-box">
         </div>
     </div>
 </div>
