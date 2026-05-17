@@ -50,6 +50,11 @@ public class UserService {
         return getUsersByRole("CUSTOMER").size();
     }
 
+    public boolean isAccountLocked(String username) {
+        // Placeholder check for future system lockout expansion
+        return false;
+    }
+
     public boolean validateUserFields(User user) {
         if (user == null) return false;
         if (user.getUsername() == null || user.getUsername().trim().isEmpty()) return false;
