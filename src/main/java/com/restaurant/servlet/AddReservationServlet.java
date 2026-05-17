@@ -41,6 +41,27 @@ public class AddReservationServlet extends HttpServlet {
             int guests = (guestsStr != null) ? Integer.parseInt(guestsStr) : 2;
             String table = request.getParameter("tableNumber");
             String status = "Pending";
+
+            if (name == null || phone == null || date == null || table == null) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("{\"success\": false, \"message\": \"Missing required fields.\"}");
+                return;
+            }
+
+            // Validate table capacity and status
+            Table selectedTable = tableDAO.getTableById(table);
+            if (selectedTable == null) {
+                response.getWriter().write("{\"success\": false, \"message\": \"Selected table does not exist.\"}");
+                return;
+            }
+            if (!"Available".equalsIgnoreCase(selectedTable.getAvailabilityStatus())) {
+                response.getWriter().write("{\"success\": false, \"message\": \"Table " + table.replace("T", "") + " is currently Not Available for service. Please select an available table.\"}");
+                return;
+            }
+            if (selectedTable.getCapacity() < guests) {
+                response.getWriter().write("{\"success\": false, \"message\": \"This table only seats " + selectedTable.getCapacity() + " guests. Please choose a larger table.\"}");
+                return;
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"success\": false, \"message\": \"Server Error: " + e.getMessage() + "\"}");
