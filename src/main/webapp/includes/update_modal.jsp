@@ -51,4 +51,61 @@
         font-weight: 700;
         margin-bottom: 5px;
     }
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .form-group-custom {
+        position: relative;
+    }
+
+    .form-group-custom label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #666;
+        margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-wrapper input,
+    .input-wrapper select {
+        width: 100%;
+        padding: 14px 45px 14px 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1rem;
+        color: #333;
+        transition: all 0.3s;
+        background: #fff;
+    }
 </style>
+
+<div id="updateModal" class="modal-overlay">
+    <div class="modal-content-custom">
+        <div class="update-modal-header">
+            <h2 class="modal-title-custom">Modify Reservation</h2>
+            <div class="modal-subtitle-custom">Booking ID: <span id="displayResId" class="booking-id-highlight">#RES-80427ED3</span></div>
+        </div>
+        <div class="update-modal-body">
+            <form id="updateForm" action="updateReservation" method="post">
+                <input type="hidden" name="reservationId" id="inputResId">
+                <input type="hidden" name="status" id="inputStatus">
+                <div class="form-grid">
+                    <div class="form-group-custom">
+                        <label>Customer Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" name="customerName" id="inputName" readonly>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
