@@ -72,6 +72,62 @@
         .login-box.wide {
             max-width: 500px;
         }
+        .branding-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #7a111e;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            display: block;
+            text-align: center;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        .login-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        .form-control {
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px !important;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .form-control:focus {
+            border-color: #7a111e;
+            box-shadow: 0 0 0 1px #7a111e;
+        }
+        .btn-signin {
+            background: #7a111e;
+            color: white;
+            padding: 16px;
+            font-weight: 600;
+            border-radius: 8px !important;
+            border: none;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-signin:hover {
+            background: white !important;
+            color: #7a111e !important;
+            box-shadow: inset 0 0 0 2px #7a111e !important;
+        }
         @media (max-width: 992px) {
             .login-image-panel {
                 display: none;
@@ -80,5 +136,26 @@
     </style>
 </head>
 <body>
+
+<div class="login-split-container">
+    <div class="login-image-panel">
+        <div class="login-quote">
+            "An unparalleled epicurean journey."
+        </div>
+    </div>
+
+    <div class="login-form-panel">
+        <a href="index.jsp" class="close-btn"><i class="fa-solid fa-xmark"></i></a>
+
+        <div class="login-box wide">
+            <span class="branding-italic">Bloom Fine Dining</span>
+            <div class="login-header">
+                <h2>Create an Account</h2>
+                <p>Experience unparalleled culinary exclusivity</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
