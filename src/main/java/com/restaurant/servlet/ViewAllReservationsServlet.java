@@ -32,9 +32,10 @@ public class ViewAllReservationsServlet extends HttpServlet {
             return;
         }
 
-        // Sort reservations chronologically descending for admin view
+        // Sort reservations chronologically descending for admin view, capped at 500 records
         request.setAttribute("reservations", reservationService.getAllReservations().stream()
                 .sorted(Comparator.comparing(com.restaurant.model.Reservation::getReservationDate, Comparator.nullsLast(Comparator.reverseOrder())))
+                .limit(500)
                 .collect(Collectors.toList()));
                 
         request.setAttribute("tables", reservationService.getAvailableTables());
