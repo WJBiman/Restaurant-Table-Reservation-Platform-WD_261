@@ -56,6 +56,12 @@ public class ViewAllReservationsServlet extends HttpServlet {
         long tablesCount = tableService.getAllTables().size();
         request.setAttribute("tablesCount", tablesCount);
 
+        // Fetch occupied tables count
+        long occupiedTablesCount = tableService.getAllTables().stream()
+                .filter(t -> "Occupied".equalsIgnoreCase(t.getAvailabilityStatus()))
+                .count();
+        request.setAttribute("occupiedTablesCount", occupiedTablesCount);
+
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }
