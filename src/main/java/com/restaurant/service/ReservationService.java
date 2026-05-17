@@ -64,4 +64,10 @@ public class ReservationService {
         if ("CANCELLED".equalsIgnoreCase(currentStatus)) return false;
         return true;
     }
+
+    public int getActiveBookingsCount() {
+        return (int) getAllReservations().stream()
+                .filter(r -> !"CANCELLED".equalsIgnoreCase(r.getStatus()))
+                .count();
+    }
 }
