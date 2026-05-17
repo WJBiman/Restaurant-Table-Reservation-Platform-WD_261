@@ -48,4 +48,13 @@ public class ReservationService {
         return getAllReservations().stream()
                 .anyMatch(r -> tableId.equalsIgnoreCase(r.getTableId()) && date.equals(r.getReservationDate()) && !"CANCELLED".equalsIgnoreCase(r.getStatus()));
     }
+
+    public List<Reservation> getReservationsByDate(String date) {
+        if (date == null || date.trim().isEmpty()) {
+            return getAllReservations();
+        }
+        return getAllReservations().stream()
+                .filter(r -> date.equals(r.getReservationDate()))
+                .collect(Collectors.toList());
+    }
 }
