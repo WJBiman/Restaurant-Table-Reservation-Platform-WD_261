@@ -44,8 +44,123 @@
             flex-direction: column;
             position: relative;
         }
+        .table-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(122, 17, 30, 0.12), 0 0 20px rgba(122, 17, 30, 0.03);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(122, 17, 30, 0.15);
+        }
+        .table-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .table-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .table-card:hover .table-img {
+            transform: scale(1.05);
+        }
+        .table-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .table-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .table-location {
+            font-size: 0.8rem;
+            color: #7a111e;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .table-meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-available { background: rgba(40, 167, 69, 0.1); color: #28a745; border: 1px solid rgba(40, 167, 69, 0.2); }
+        .status-occupied { background: rgba(211, 47, 47, 0.1); color: #d32f2f; border: 1px solid rgba(211, 47, 47, 0.2); }
+        .btn-reserve {
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 16px 12px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border: none;
+        }
+        .btn-available { background: #800020; color: white; }
+        .btn-available:hover { background: #680018; color: white; transform: translateY(-2px); }
+        .btn-unavailable { background: #f4f4f4; color: #666; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
+
+<div class="container pb-5">
+    <div class="tables-hero">
+        <h2>Our Curated Dining Spaces</h2>
+        <p class="text-muted">Discover the perfect setting for your next culinary journey.</p>
+    </div>
+
+    <div class="row g-4">
+        <%
+            TableDAO tableDAO = new TableDAO();
+            List<Table> tables = tableDAO.getAllTables();
+            if (tables != null) {
+                for (Table t : tables) {
+                    String tableId = t.getTableId();
+                    String imgPath = "images/table_" + tableId.toLowerCase() + ".png";
+                    boolean isAvailable = "Available".equalsIgnoreCase(t.getAvailabilityStatus());
+        %>
+        <div class="col-md-4">
+            <div class="table-card">
+                <div class="table-img-wrapper">
+                    <img src="<%= imgPath %>" class="table-img" alt="Table <%= tableId %>" onerror="this.src='images/bloom_indoor_elegance_1776880086931.png'">
+                </div>
+                <div class="table-info">
+                    <h4 class="table-title">Table <%= tableId.replace("T", "") %></h4>
+                    <div class="table-location"><%= t.getLocation() %></div>
+                    
+                    <div class="table-meta">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-user-group text-muted"></i>
+                            <span>Seats <b><%= t.getCapacity() %></b></span>
+                        </div>
+                        <span class="status-pill <%= isAvailable ? "status-available" : "status-occupied" %>">
+                            <%= isAvailable ? "Available" : "Not Available" %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%      } 
+            } %>
+    </div>
+</div>
+
 </body>
 </html>
