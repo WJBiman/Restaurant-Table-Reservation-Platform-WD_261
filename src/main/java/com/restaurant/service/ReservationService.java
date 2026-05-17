@@ -57,4 +57,11 @@ public class ReservationService {
                 .filter(r -> date.equals(r.getReservationDate()))
                 .collect(Collectors.toList());
     }
+
+    public boolean isValidStatusTransition(String currentStatus, String nextStatus) {
+        if (currentStatus == null || nextStatus == null) return false;
+        // CANCELLED status is terminal
+        if ("CANCELLED".equalsIgnoreCase(currentStatus)) return false;
+        return true;
+    }
 }
