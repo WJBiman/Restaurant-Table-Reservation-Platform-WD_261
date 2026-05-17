@@ -42,6 +42,12 @@ public class TableService {
         return capacity >= 2 && capacity <= 20;
     }
 
+    public int getOccupiedTablesCount() {
+        return (int) getAllTables().stream()
+                .filter(t -> "Occupied".equalsIgnoreCase(t.getAvailabilityStatus()))
+                .count();
+    }
+
     public boolean deleteTable(String tableId) {
         Table existing = getTableById(tableId);
         if (existing == null) {
