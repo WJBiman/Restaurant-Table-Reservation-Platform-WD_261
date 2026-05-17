@@ -20,7 +20,12 @@ public class MyAccountServlet extends HttpServlet {
 
     @Override
     public void init() {
-        this.reservationService = new ReservationService();
+        try {
+            this.reservationService = new ReservationService();
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to initialize reservation service in MyAccountServlet: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
