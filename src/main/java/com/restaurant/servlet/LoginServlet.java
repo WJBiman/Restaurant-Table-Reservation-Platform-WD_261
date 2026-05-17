@@ -27,6 +27,8 @@ public class LoginServlet extends HttpServlet {
         if ("admin".equals(user) && "admin123".equals(pass)) {
             HttpSession session = request.getSession();
             session.setAttribute("adminLoggedIn", true);
+            // Set session timeout of 30 mins
+            session.setMaxInactiveInterval(30 * 60);
             response.sendRedirect("viewAllReservations");
             return;
         }
@@ -40,6 +42,8 @@ public class LoginServlet extends HttpServlet {
         
         if (matchedUser != null) {
             HttpSession session = request.getSession();
+            // Set session timeout of 30 mins
+            session.setMaxInactiveInterval(30 * 60);
             if ("ADMIN".equalsIgnoreCase(matchedUser.getRole())) {
                 session.setAttribute("adminLoggedIn", true);
                 response.sendRedirect("viewAllReservations");
