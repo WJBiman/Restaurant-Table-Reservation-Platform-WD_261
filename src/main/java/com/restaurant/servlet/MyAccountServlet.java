@@ -51,6 +51,9 @@ public class MyAccountServlet extends HttpServlet {
         long activeCount = myReservations.stream().filter(r -> !"CANCELLED".equalsIgnoreCase(r.getStatus())).count();
         long cancelledCount = myReservations.stream().filter(r -> "CANCELLED".equalsIgnoreCase(r.getStatus())).count();
         
+        // Log diagnostics details for session validation
+        System.out.println("[DIAGNOSTIC] Loaded myAccount dashboard for user: " + session.getAttribute("customerUsername") + " | Active reservations: " + activeCount);
+
         request.setAttribute("activeReservationsCount", activeCount);
         request.setAttribute("cancelledReservationsCount", cancelledCount);
 
