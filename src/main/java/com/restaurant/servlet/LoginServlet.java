@@ -23,6 +23,10 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        // Trim inputs to prevent spacing errors
+        user = user.trim();
+        pass = pass.trim();
+
         // Hardcoded admin
         if ("admin".equals(user) && "admin123".equals(pass)) {
             HttpSession session = request.getSession();
@@ -34,9 +38,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         // Check against Database
+        final String finalUser = user;
+        final String finalPass = pass;
         com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
         com.restaurant.model.User matchedUser = userService.getAllUsers().stream()
-                .filter(u -> u.getUsername().equals(user) && u.getPassword().equals(pass))
+                .filter(u -> u.getUsername().equals(finalUser) && u.getPassword().equals(finalPass))
                 .findFirst()
                 .orElse(null);
         
