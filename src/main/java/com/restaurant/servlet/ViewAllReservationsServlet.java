@@ -13,7 +13,17 @@ import java.util.stream.Collectors;
 
 @WebServlet("/viewAllReservations")
 public class ViewAllReservationsServlet extends HttpServlet {
-    private ReservationService reservationService = new ReservationService();
+    private ReservationService reservationService;
+
+    @Override
+    public void init() {
+        try {
+            this.reservationService = new ReservationService();
+        } catch (Exception e) {
+            System.err.println("[ADMIN ERROR] Failed to initialize reservation service inside ViewAllReservationsServlet: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
