@@ -68,6 +68,73 @@
             max-width: 420px;
             margin: auto;
         }
+        .branding-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #7a111e;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            display: block;
+            text-align: center;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        .login-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        .form-control {
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px !important;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .form-control:focus {
+            border-color: #7a111e;
+            box-shadow: 0 0 0 1px #7a111e;
+        }
+        .btn-signin {
+            background: #7a111e;
+            color: white;
+            padding: 16px;
+            font-weight: 600;
+            border-radius: 8px !important;
+            border: none;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-signin:hover {
+            background: white !important;
+            color: #7a111e !important;
+            box-shadow: inset 0 0 0 2px #7a111e !important;
+        }
+        .signup-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+        }
+        .signup-footer a {
+            color: #7a111e;
+            font-weight: 700;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +151,25 @@
     <div class="login-form-panel">
         <a href="index.jsp" class="close-btn"><i class="fa-solid fa-xmark"></i></a>
         <div class="login-box">
+            <span class="branding-italic">Bloom Fine Dining</span>
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your details to access your account</p>
+            </div>
+            <form action="login" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-signin">Sign In</button>
+            </form>
+            <div class="signup-footer">
+                Don't have an account? <a href="signup.jsp">Sign up</a>
+            </div>
         </div>
     </div>
 </div>
