@@ -26,6 +26,8 @@ public class ViewAllReservationsServlet extends HttpServlet {
         com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
         request.setAttribute("users", userService.getAllUsers());
         
+        com.restaurant.service.TableService tableService = new com.restaurant.service.TableService();
+        
         // Fetch completed count
         int completedCount = 0;
         try (java.sql.Connection conn = com.restaurant.util.DBConnection.getConnection();
@@ -49,6 +51,10 @@ public class ViewAllReservationsServlet extends HttpServlet {
                 .filter(u -> "CUSTOMER".equalsIgnoreCase(u.getRole()))
                 .count();
         request.setAttribute("customerCount", customerCount);
+
+        // Fetch total tables count
+        long tablesCount = tableService.getAllTables().size();
+        request.setAttribute("tablesCount", tablesCount);
 
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
