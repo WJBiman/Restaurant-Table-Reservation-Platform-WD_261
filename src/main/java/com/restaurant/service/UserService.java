@@ -46,6 +46,10 @@ public class UserService {
         return phone.matches("^[\\d\\s\\+\\-]{7,15}$");
     }
 
+    public int getCustomerCount() {
+        return getUsersByRole("CUSTOMER").size();
+    }
+
     public boolean validateUserFields(User user) {
         if (user == null) return false;
         if (user.getUsername() == null || user.getUsername().trim().isEmpty()) return false;
