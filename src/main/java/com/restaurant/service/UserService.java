@@ -46,9 +46,20 @@ public class UserService {
         return phone.matches("^[\\d\\s\\+\\-]{7,15}$");
     }
 
+    public boolean validateUserFields(User user) {
+        if (user == null) return false;
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) return false;
+        if (user.getName() == null || user.getName().trim().isEmpty()) return false;
+        if (user.getEmail() == null || !user.getEmail().contains("@")) return false;
+        return true;
+    }
+
     public boolean addUser(User user) {
         User existing = getUserById(user.getId());
         if (existing != null) {
+            return false;
+        }
+        if (!validateUserFields(user)) {
             return false;
         }
         userDAO.addUser(user);
@@ -58,6 +69,9 @@ public class UserService {
     public boolean updateUser(User updatedUser) {
         User existing = getUserById(updatedUser.getId());
         if (existing == null) {
+            return false;
+        }
+        if (!validateUserFields(updatedUser)) {
             return false;
         }
         userDAO.updateUser(updatedUser);
