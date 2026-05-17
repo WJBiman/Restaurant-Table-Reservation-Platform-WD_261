@@ -45,5 +45,15 @@
     </style>
 </head>
 <body>
+
+<div class="login-split-container">
+    <!-- Left Side: Image & Quote -->
+    <div class="login-image-panel">
+        <div class="login-quote">
+            "An unparalleled epicurean journey."
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
