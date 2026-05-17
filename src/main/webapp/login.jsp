@@ -171,7 +171,7 @@
             <form action="login" method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
                 </div>
 
                 <div class="mb-3">
@@ -190,5 +190,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("username").focus();
+    });
+</script>
 </body>
 </html>
