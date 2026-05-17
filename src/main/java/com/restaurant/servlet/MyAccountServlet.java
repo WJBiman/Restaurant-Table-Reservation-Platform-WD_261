@@ -42,6 +42,12 @@ public class MyAccountServlet extends HttpServlet {
                 .limit(50) // Safeguard maximum records displayed in dashboard
                 .collect(Collectors.toList());
 
+        long activeCount = myReservations.stream().filter(r -> !"CANCELLED".equalsIgnoreCase(r.getStatus())).count();
+        long cancelledCount = myReservations.stream().filter(r -> "CANCELLED".equalsIgnoreCase(r.getStatus())).count();
+        
+        request.setAttribute("activeReservationsCount", activeCount);
+        request.setAttribute("cancelledReservationsCount", cancelledCount);
+
         List<com.restaurant.model.Table> tables = new com.restaurant.service.TableService().getAllTables();
         request.setAttribute("tables", tables);
         request.setAttribute("myReservations", myReservations);
