@@ -1,4 +1,4 @@
-﻿package com.restaurant.servlet;
+package com.restaurant.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +15,13 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
+
+        // Basic parameter empty checking
+        if (user == null || pass == null || user.trim().isEmpty() || pass.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Username and password cannot be empty.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
 
         // Hardcoded admin
         if ("admin".equals(user) && "admin123".equals(pass)) {
