@@ -8,4 +8,18 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class RoutingFilter implements Filter {
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        String uri = req.getRequestURI();
+
+        // Redirect legacy path and load custom account dashboard
+        if (uri.endsWith("/my_account.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myAccount");
+            return;
+        }
+
+        chain.doFilter(request, response);
+    }
 }
