@@ -38,6 +38,14 @@ public class UserService {
         return getAllUsers().stream().anyMatch(u -> email.equalsIgnoreCase(u.getEmail()));
     }
 
+    public boolean isValidPhone(String phone) {
+        if (phone == null || phone.trim().isEmpty()) {
+            return false;
+        }
+        // Match numbers, spaces, plus signs
+        return phone.matches("^[\\d\\s\\+\\-]{7,15}$");
+    }
+
     public boolean addUser(User user) {
         User existing = getUserById(user.getId());
         if (existing != null) {
