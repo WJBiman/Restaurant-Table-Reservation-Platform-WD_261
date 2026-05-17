@@ -1,4 +1,4 @@
-﻿package com.restaurant.service;
+package com.restaurant.service;
 
 import com.restaurant.dao.UserDAO;
 import com.restaurant.model.User;
@@ -22,6 +22,13 @@ public class UserService {
 
     public User getUserById(String userId) {
         return userDAO.getUserById(userId);
+    }
+
+    public boolean isUsernameTaken(String username) {
+        if (username == null || username.trim().isEmpty()) {
+            return false;
+        }
+        return getAllUsers().stream().anyMatch(u -> username.equalsIgnoreCase(u.getUsername()));
     }
 
     public boolean addUser(User user) {
