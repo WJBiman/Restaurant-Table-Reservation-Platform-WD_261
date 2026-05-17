@@ -13,4 +13,20 @@ import java.io.IOException;
 @WebServlet("/updateTable")
 public class UpdateTableServlet extends HttpServlet {
     private TableService tableService = new TableService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("adminLoggedIn") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("adminLoggedIn") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    }
 }
