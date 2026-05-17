@@ -128,6 +128,17 @@
             color: #7a111e !important;
             box-shadow: inset 0 0 0 2px #7a111e !important;
         }
+        .signup-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+        }
+        .signup-footer a {
+            color: #7a111e;
+            font-weight: 700;
+            text-decoration: none;
+        }
         @media (max-width: 992px) {
             .login-image-panel {
                 display: none;
@@ -153,9 +164,60 @@
                 <h2>Create an Account</h2>
                 <p>Experience unparalleled culinary exclusivity</p>
             </div>
+
+            <% if (request.getAttribute("errorMessage") != null) { %>
+                <div class="alert alert-danger py-2 small mb-4" style="border-radius: 8px;">
+                    <%= request.getAttribute("errorMessage") %>
+                </div>
+            <% } %>
+
+            <form id="signupForm" action="signup" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="username" required>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" placeholder="email@domain.com" required>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-signin">Sign Up</button>
+            </form>
+
+            <div class="signup-footer">
+                Already have an account? <a href="login.jsp">Sign In</a>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert("Passwords do not match!");
+        }
+    });
+</script>
 
 </body>
 </html>
