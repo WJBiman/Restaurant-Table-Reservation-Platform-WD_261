@@ -20,6 +20,15 @@ public class UpdateTableServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
+        String id = request.getParameter("id");
+        Table table = tableService.getTableById(id);
+        if (table != null) {
+            request.setAttribute("table", table);
+            request.getRequestDispatcher("admin_update_table.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("viewAllReservations");
+        }
     }
 
     @Override
