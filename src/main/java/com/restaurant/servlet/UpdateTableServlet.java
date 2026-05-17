@@ -37,5 +37,20 @@ public class UpdateTableServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+
+        String tableId = request.getParameter("tableId");
+        int capacity = Integer.parseInt(request.getParameter("capacity"));
+        String status = request.getParameter("availabilityStatus");
+
+        Table table = new Table(tableId != null ? tableId.trim() : null, capacity, status);
+        boolean success = tableService.updateTable(table);
+
+        if (success) {
+            response.sendRedirect("viewAllReservations");
+        } else {
+            request.setAttribute("errorMessage", "Failed to update table.");
+            request.setAttribute("table", table);
+            request.getRequestDispatcher("admin_update_table.jsp").forward(request, response);
+        }
     }
 }
