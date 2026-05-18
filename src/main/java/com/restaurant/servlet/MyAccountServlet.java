@@ -48,7 +48,7 @@ public class MyAccountServlet extends HttpServlet {
         final String searchEmail = email != null ? email.trim() : "";
         
         List<Reservation> myReservations = reservationService.getAllReservations().stream()
-                .filter(r -> (!searchPhone.isEmpty() && r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone)) || (!searchEmail.isEmpty() && r.getEmail() != null && r.getEmail().trim().equalsIgnoreCase(searchEmail)))
+                .filter(r -> !searchPhone.isEmpty() && r.getPhoneNumber() != null && r.getPhoneNumber().trim().equals(searchPhone))
                 .sorted(Comparator.comparing(Reservation::getReservationDate, Comparator.nullsLast(Comparator.reverseOrder())))
                 .limit(50) // Safeguard maximum records displayed in dashboard
                 .collect(Collectors.toList());
