@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="src/main/webapp/images/bloomhomepageassets.png" alt="Bloom Logo" width="180" style="border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.15);"/>
-</p>
 
 <h1 align="center">🌹 Bloom - Restaurant Table Reservation Platform 🌹</h1>
 
