@@ -192,25 +192,25 @@ http://localhost:8080/
 ### 💻 Home Page
 The public landing page introduces patrons to the Bloom fine dining experience, allowing them to search for tables, browse dining spaces, and initiate booking requests.
 <p align="center">
-  <img src="src/main/webapp/images/landing_page_mockup.png" alt="Main Landing Page" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
+  <img src="src/main/webapp/images/Mockup/home%20page.png" alt="Main Landing Page" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
 </p>
 
 ### 🔐 Reservations / Bookings Page
 A customer-facing dashboard that allows registered guests to view active and past bookings, update details, or cancel reservations securely.
 <p align="center">
-  <img src="src/main/webapp/images/reservations_page_mockup.png" alt="Customer Bookings Portal" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
+  <img src="src/main/webapp/images/Mockup/my%20booking%20page.png" alt="Customer Bookings Portal" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
 </p>
 
 ### 📊 Master Administrative Board
 The central workspace for administrators. It details KPIs (active reservations, completed bookings, registered guests, and occupied tables) and includes table lists to approve, cancel, edit, or archive reservations.
 <p align="center">
-  <img src="src/main/webapp/images/admin_panel_mockup.png" alt="Admin Panel Layout" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
+  <img src="src/main/webapp/images/Mockup/admin%20dashboard.png" alt="Admin Panel Layout" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
 </p>
 
 ### 🗃️ Table Inventory
 Displays the visual restaurant layout with details on table allocations, seating capacities, and locations.
 <p align="center">
-  <img src="src/main/webapp/images/table_page_mockup.png" alt="Table Floor Plan Manager" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
+  <img src="src/main/webapp/images/Mockup/table%20page.png" alt="Table Floor Plan Manager" width="700" style="border-radius: 8px; border: 1px solid #ddd;"/>
 </p>
 
 ---
@@ -221,30 +221,53 @@ For organic and systematic parallel development, the group implemented a feature
 
 ```mermaid
 gitGraph
-    commit id: "initial repository setup"
+    commit id: "Initial Project Setup"
     branch Authentication-Management
-    branch User-Management
-    branch Reservation-Management
-    branch Table-Management
-    branch Profile-Management
-    branch Admin-Management
-    
     checkout Authentication-Management
-    commit id: "added login validations"
-    commit id: "added route filter rules"
+    commit id: "auth: filter & session layout"
+    commit id: "auth: login scripts & view"
+    checkout main
+    merge Authentication-Management id: "Merge Authentication"
     
+    branch User-Management
     checkout User-Management
-    commit id: "created signup layout"
-    commit id: "implemented UserDAO logic"
+    commit id: "user: signup form UI"
+    commit id: "user: model inheritance & UserDAO"
+    checkout main
+    merge User-Management id: "Merge User-Management"
+    
+    branch Reservation-Management
+    checkout Reservation-Management
+    commit id: "res: availability checker logic"
+    commit id: "res: booking page templates"
+    checkout main
+    merge Reservation-Management id: "Merge Reservation"
+    
+    branch Table-Management
+    checkout Table-Management
+    commit id: "table: capacity checkers"
+    commit id: "table: custom management grid"
+    checkout main
+    merge Table-Management id: "Merge Table-Management"
+    
+    branch Profile-Management
+    checkout Profile-Management
+    commit id: "profile: update modals layout"
+    commit id: "profile: personal details servlets"
+    checkout main
+    merge Profile-Management id: "Merge Profile-Management"
     
     checkout Reservation-Management
-    commit id: "created booking page"
-    commit id: "added date checks"
-    
+    commit id: "res: missing service & DAO logic"
     checkout main
-    merge Authentication-Management id: "Merged Auth"
-    merge User-Management id: "Merged User"
-    merge Reservation-Management id: "Merged Reservation"
+    merge Reservation-Management id: "Merge Res-Management Fixes"
+    
+    branch Admin-Management
+    checkout Admin-Management
+    commit id: "admin: KPI metrics & widgets"
+    commit id: "admin: control panels & actions"
+    checkout main
+    merge Admin-Management id: "Merge Admin-Management"
 ```
 
 * **`main` Branch**: Contains the stable, 100% integrated finished product.
@@ -258,12 +281,12 @@ The project was completed through collaborative teamwork by **Group WD_261**:
 
 | Member Profile | Student ID | Dedicated Git Branch | Primary Contributions & Roles |
 |---|---|---|---|
-| **Perera P.H.M** | `it25103439` | `User-Management` | **User Domain Architecture**: Designed `User`, `Person`, `Admin`, and `Customer` model inheritance. Coded `UserDAO`, registration logic, and admin customer tables. |
-| **Gajaweera G.A.S.N** | `it25102707` | `Authentication-Management` | **Security & Access Control**: Designed application routing filters, session validators, secure signout flow, and Web configuration mappings. |
-| **Siriwardana H.D.K.P** | `it25101476` | `Reservation-Management` | **Booking Engine Logic**: Created reservation workflows, validation handlers for booking slots, and table availability models. |
-| **Pushpakumara A.S.P.W.A** | `it25103286` | `Table-Management` | **Table Inventory Subsystem**: Developed capacity checkers, administrator table controls, and service layers for table allocation. |
-| **Chathushka A.H.S** | `it25101421` | `Profile-Management` | **User Panel & Modals**: Built the responsive custom modals, personal information update servlet, and historical reservation list controllers. |
-| **Warushawithana J.B** | `wjbiman` | `Admin-Management` | **Global Systems & Assets**: Coded the master administrative dashboard servlets, SQL schemas, public page assets, and global database connectors. |
+| **Perera P.H.M** | `IT25103439` | `User-Management` | **User Domain Architecture**: Designed `User`, `Person`, `Admin`, and `Customer` model inheritance. Coded `UserDAO`, registration logic, and admin customer tables. |
+| **Gajaweera G.A.S.N** | `IT25102707` | `Authentication-Management` | **Security & Access Control**: Designed application routing filters, session validators, secure signout flow, and Web configuration mappings. |
+| **Siriwardana H.D.K.P** | `IT25101476` | `Reservation-Management` | **Booking Engine Logic**: Created reservation workflows, validation handlers for booking slots, and table availability models. |
+| **Pushpakumara A.S.P.W.A** | `IT25103286` | `Table-Management` | **Table Inventory Subsystem**: Developed capacity checkers, administrator table controls, and service layers for table allocation. |
+| **Chathushka A.H.S** | `IT25101421` | `Profile-Management` | **User Panel & Modals**: Built the responsive custom modals, personal information update servlet, and historical reservation list controllers. |
+| **Warushawithana J.B** | `IT25100691` | `Admin-Management` | **Global Systems & Assets**: Coded the master administrative dashboard servlets, SQL schemas, public page assets, and global database connectors. |
 
 ---
 
