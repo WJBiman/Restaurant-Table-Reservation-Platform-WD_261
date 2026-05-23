@@ -7,6 +7,9 @@ RUN mvn clean package -DskipTests
 # --- Stage 2: Run Tomcat and MariaDB ---
 FROM tomcat:9.0-jdk17-openjdk-slim
 
+# Disable Tomcat shutdown port to force Render to route to port 8080
+RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
+
 # Install MariaDB server and client
 RUN apt-get update && \
     apt-get install -y mariadb-server mariadb-client && \
