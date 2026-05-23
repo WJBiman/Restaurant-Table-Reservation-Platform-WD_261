@@ -64,6 +64,8 @@
         font-weight: 700;
     }
 
+
+
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -126,6 +128,7 @@
         font-size: 1.1rem;
         cursor: pointer;
         pointer-events: all;
+        /* Ensure click passes through if needed, but here we'll use JS to trigger picker */
         transition: color 0.3s;
     }
 
@@ -133,6 +136,7 @@
         color: #7a111e;
     }
 
+    /* Hide browser default icons but keep picker functional */
     input::-webkit-calendar-picker-indicator {
         position: absolute;
         right: 10px;
@@ -140,6 +144,7 @@
         width: 40px;
         height: 100%;
         opacity: 0;
+        /* Fully transparent but covers the area */
         cursor: pointer;
     }
 
@@ -186,6 +191,7 @@
         transform: translateY(-2px);
     }
 
+    /* Small success modal overrides */
     .success-modal {
         max-width: 550px;
         text-align: center;
@@ -235,6 +241,7 @@
         }
     }
 
+    /* Custom Dropdown Styling */
     .custom-select-wrapper { position: relative; user-select: none; width: 100%; }
     .custom-select-trigger { display: flex; align-items: center; justify-content: space-between; cursor: pointer; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 14px 15px; color: #333; transition: all 0.3s; width: 100%; }
     .custom-select-wrapper.open .custom-select-trigger { border-color: #7a111e; box-shadow: 0 0 0 4px rgba(122, 17, 30, 0.05); }
@@ -261,11 +268,13 @@
         document.getElementById('inputGuests').dispatchEvent(new Event('change'));
         document.getElementById('inputStatus').value = status;
 
+        // Ensure table selection is set correctly after list is loaded
         const tableSelect = document.getElementById('inputTable');
         if (tableSelect.options.length > 0) {
             tableSelect.value = table;
             tableSelect.dispatchEvent(new Event('change'));
         } else {
+            // Wait for data if using the JSON fallback
             setTimeout(() => { tableSelect.value = table; tableSelect.dispatchEvent(new Event('change')); }, 100);
         }
 
@@ -281,6 +290,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        // Initialize custom selects for glassmorphism dropdown menus
         document.querySelectorAll('.input-wrapper select').forEach(function(select) {
             const wrapper = document.createElement('div');
             wrapper.className = 'custom-select-wrapper';
@@ -426,6 +436,7 @@
             <h2 class="modal-title-custom">Modify Reservation</h2>
             <div class="modal-subtitle-custom">Booking ID: <span id="displayResId"
                     class="booking-id-highlight">#RES-80427ED3</span></div>
+
         </div>
         <div class="update-modal-body">
             <div id="updateErrorAlert" class="alert alert-danger"

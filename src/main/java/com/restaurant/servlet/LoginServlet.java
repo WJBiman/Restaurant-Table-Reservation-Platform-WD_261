@@ -16,40 +16,23 @@ public class LoginServlet extends HttpServlet {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
 
-        // Basic parameter empty checking
-        if (user == null || pass == null || user.trim().isEmpty() || pass.trim().isEmpty()) {
-            request.setAttribute("errorMessage", "Username and password cannot be empty.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-
-        // Trim inputs to prevent spacing errors
-        user = user.trim();
-        pass = pass.trim();
-
         // Hardcoded admin
         if ("admin".equals(user) && "admin123".equals(pass)) {
             HttpSession session = request.getSession();
             session.setAttribute("adminLoggedIn", true);
-            // Set session timeout of 30 mins
-            session.setMaxInactiveInterval(30 * 60);
             response.sendRedirect("viewAllReservations");
             return;
         }
 
         // Check against Database
-        final String finalUser = user;
-        final String finalPass = pass;
         com.restaurant.service.UserService userService = new com.restaurant.service.UserService();
         com.restaurant.model.User matchedUser = userService.getAllUsers().stream()
-                .filter(u -> u.getUsername().equals(finalUser) && u.getPassword().equals(finalPass))
+                .filter(u -> u.getUsername().equals(user) && u.getPassword().equals(pass))
                 .findFirst()
                 .orElse(null);
         
         if (matchedUser != null) {
             HttpSession session = request.getSession();
-            // Set session timeout of 30 mins
-            session.setMaxInactiveInterval(30 * 60);
             if ("ADMIN".equalsIgnoreCase(matchedUser.getRole())) {
                 session.setAttribute("adminLoggedIn", true);
                 response.sendRedirect("viewAllReservations");

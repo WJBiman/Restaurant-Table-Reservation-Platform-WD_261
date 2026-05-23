@@ -25,18 +25,18 @@
             font-weight: 700;
         }
         .table-card {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.25); /* More transparent for deeper effect */
             backdrop-filter: blur(25px) saturate(200%);
             -webkit-backdrop-filter: blur(25px) saturate(200%);
             border: 1px solid rgba(255, 255, 255, 0.5); 
-            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8); /* "Shine" from top */
             border-left: 1px solid rgba(255, 255, 255, 0.8); 
-            border-radius: 32px;
+            border-radius: 32px; /* Softer, more organic corners */
             overflow: hidden;
             box-shadow: 
                 0 20px 50px rgba(0,0,0,0.1), 
                 inset 0 0 80px rgba(255, 255, 255, 0.1),
-                inset 0 0 1px 1px rgba(255, 255, 255, 0.5);
+                inset 0 0 1px 1px rgba(255, 255, 255, 0.5); /* Internal glass edge */
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin-bottom: 30px;
             height: 100%;
@@ -47,7 +47,7 @@
         .table-card:hover {
             transform: translateY(-12px);
             box-shadow: 0 30px 60px rgba(122, 17, 30, 0.12), 0 0 20px rgba(122, 17, 30, 0.03);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.85); /* Smoothly becomes more opaque on hover */
             border-color: rgba(122, 17, 30, 0.15);
         }
         .table-img-wrapper {
@@ -118,7 +118,6 @@
         .btn-unavailable { background: #f4f4f4; color: #666; border: 1px solid #ddd; }
     </style>
 </head>
-<body>
 
 <div class="container pb-5">
     <div class="tables-hero">
@@ -201,5 +200,3 @@
 </script>
 
 <jsp:include page="includes/footer.jsp" />
-</body>
-</html>

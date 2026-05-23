@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="css/style.css?v=6" rel="stylesheet">
     
     <% 
         String uri = request.getRequestURI();
@@ -14,6 +15,7 @@
     %>
     
     <style>
+        /* General Navbar Transition Logic */
         .navbar {
             transition: all 0.4s ease-in-out;
             position: fixed;
@@ -21,6 +23,8 @@
             top: 0;
             z-index: 1000;
         }
+
+        /* Standard Branding Colors (Base) */
         .navbar-brand {
             color: #7a111e !important;
             font-size: 1.6rem;
@@ -45,6 +49,10 @@
             color: #333333 !important;
             transition: all 0.4s ease;
         }
+
+        /* --- CONDITIONAL LAYOUT CLASSES --- */
+        
+        /* Home Header: Starts Transparent */
         .header-home:not(.header-scrolled) {
             background-color: transparent !important;
             border-bottom: none !important;
@@ -61,12 +69,16 @@
         .header-home:not(.header-scrolled) .fa-solid {
             color: #ffffff !important;
         }
+
+        /* Scrolled state or Non-Home pages: Solid White */
         .header-solid, .header-scrolled {
             background-color: #ffffff !important;
             padding: 18px 0;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid #eaeaea;
         }
+
+        /* Body padding for content visibility */
         .body-home { padding-top: 0 !important; }
         .body-standard { padding-top: 90px !important; }
     </style>

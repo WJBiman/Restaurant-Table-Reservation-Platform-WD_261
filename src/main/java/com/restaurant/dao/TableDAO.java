@@ -1,4 +1,4 @@
-﻿package com.restaurant.dao;
+package com.restaurant.dao;
 
 import com.restaurant.model.Table;
 import com.restaurant.util.DBConnection;

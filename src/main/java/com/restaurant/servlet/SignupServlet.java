@@ -1,4 +1,4 @@
-﻿package com.restaurant.servlet;
+package com.restaurant.servlet;
 
 import com.restaurant.model.User;
 

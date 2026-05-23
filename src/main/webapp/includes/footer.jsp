@@ -11,6 +11,9 @@
                     <a href="privacy_policy.jsp" class="text-muted text-decoration-none small" style="letter-spacing: 1px;">PRIVACY POLICY</a>
                     <a href="terms_of_service.jsp" class="text-muted text-decoration-none small" style="letter-spacing: 1px;">TERMS OF SERVICE</a>
                     <a href="sustainability.jsp" class="text-muted text-decoration-none small" style="letter-spacing: 1px;">SUSTAINABILITY</a>
+
+                </div>
+                <div class="d-flex gap-3 justify-content-md-end text-muted">
                 </div>
             </div>
         </div>

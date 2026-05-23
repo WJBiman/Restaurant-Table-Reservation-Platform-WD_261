@@ -1,4 +1,4 @@
-﻿package com.restaurant.dao;
+package com.restaurant.dao;
 
 import com.restaurant.model.User;
 import com.restaurant.util.DBConnection;
@@ -7,10 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Data Access Object for User operations.
- * Handles all database interactions for the 'users' table.
- */
 public class UserDAO {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -103,7 +99,6 @@ public class UserDAO {
         }
         return null;
     }
-
     public List<User> getUsersByRole(String role) {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users WHERE LOWER(role)=LOWER(?)";

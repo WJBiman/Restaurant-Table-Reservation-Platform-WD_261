@@ -47,6 +47,7 @@ buildNumber.properties
 
 # Custom Project Legacy Files
 build_classes/
+com/
 data/
 tomcat/
 copy_images.bat

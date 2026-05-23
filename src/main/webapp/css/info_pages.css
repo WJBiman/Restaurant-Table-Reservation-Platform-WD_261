@@ -1,0 +1,85 @@
+:root {
+    --primary-color: #721c24;
+    --accent-color: #d4af37;
+    --text-color: #333;
+    --bg-color: #fffefb;
+    --font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.info-header {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.info-header h1 {
+    font-family: serif;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.info-header .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+    margin: 0 auto;
+}
+
+.info-content h2 {
+    font-family: serif;
+    font-size: 1.8rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.info-content p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.info-content ul {
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.info-content li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 40px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Navbar & Footer consistency */
+.navbar-brand { font-family: serif; color: var(--primary-color) !important; font-weight: bold; }
+footer { margin-top: 100px; padding: 40px 0; border-top: 1px solid #eee; background: white; }
+.footer-logo { font-family: serif; font-size: 1.5rem; font-weight: bold; color: var(--primary-color); text-decoration: none; }
+.footer-links { display: flex; gap: 30px; }
+.footer-links a { text-decoration: none; color: #888; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+.copyright { color: #999; font-size: 0.8rem; }

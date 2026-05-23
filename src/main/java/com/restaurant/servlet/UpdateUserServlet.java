@@ -1,4 +1,4 @@
-﻿package com.restaurant.servlet;
+package com.restaurant.servlet;
 
 import com.restaurant.model.User;
 import com.restaurant.service.UserService;
@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet handling administrative user profile updates.
- * Provides both data loading and persistence for staff management.
- */
 @WebServlet("/updateUser")
 public class UpdateUserServlet extends HttpServlet {
     private UserService userService = new UserService();
